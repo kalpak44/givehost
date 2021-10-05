@@ -15,7 +15,6 @@ script:
   - docker --version
   - docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
   - docker build -t give-host .
-  - docker tag give-host kalpak44/give-host:latest
   - docker push kalpak44/give-host:latest
 
 deploy:
