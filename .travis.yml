@@ -14,7 +14,7 @@ before_install:
 script:
   - docker --version
   - docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
-  - docker build -t give-host .
+  - docker build .
   - docker push kalpak44/give-host:latest
 
 deploy:
