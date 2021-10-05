@@ -1,0 +1,9 @@
+version: "3.8"
+services:
+  telegram-bot:
+    restart: always
+    image: kalpak44/give-host:latest
+    container_name: telegram-bot
+    environment:
+      PAYMENTS_STRIPE_KEY_PUBLIC: ${PAYMENTS_STRIPE_KEY_PUBLIC}
+      PAYMENTS_STRIPE_KEY_SECRET: ${PAYMENTS_STRIPE_KEY_SECRET}
