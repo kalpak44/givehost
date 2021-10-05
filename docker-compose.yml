@@ -4,6 +4,8 @@ services:
     restart: always
     image: kalpak44/give-host:latest
     container_name: give-host
+    ports:
+      - "8080:80"
     environment:
       PAYMENTS_STRIPE_KEY_PUBLIC: ${PAYMENTS_STRIPE_KEY_PUBLIC}
       PAYMENTS_STRIPE_KEY_SECRET: ${PAYMENTS_STRIPE_KEY_SECRET}
