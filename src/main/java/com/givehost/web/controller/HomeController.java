@@ -8,6 +8,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class HomeController {
     @GetMapping("/")
     public String showUserList(Model model) {
-        return "pages/home";
+        return "/pages/home";
     }
 }

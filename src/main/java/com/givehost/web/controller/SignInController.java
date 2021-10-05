@@ -8,6 +8,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class SignInController {
     @GetMapping("/sign-in")
     public String showUserList(Model model) {
-        return "pages/sign-in";
+        return "/pages/sign-in";
     }
 }
