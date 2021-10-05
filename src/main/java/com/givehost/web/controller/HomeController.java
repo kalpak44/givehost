@@ -5,9 +5,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
-public class IndexController {
+public class HomeController {
     @GetMapping("/")
     public String showUserList(Model model) {
-        return "index";
+        return "pages/home";
     }
 }
