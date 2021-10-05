@@ -15,7 +15,7 @@ script:
   - docker --version
   - docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
   - docker build -t give-host .
-  - docker tag telegram-bot kalpak44/give-host:latest
+  - docker tag give-hos kalpak44/give-host:latest
   - docker push kalpak44/give-host:latest
 
 deploy:
