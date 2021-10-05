@@ -1,5 +1,17 @@
 version: "3.9"
 services:
+  db:
+    image: mysql:5.7
+    ports:
+    - "3306:3306"
+    volumes:
+      - db_data:/var/lib/mysql
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_DATABASE: db_name
+      MYSQL_USER: username
+      MYSQL_PASSWORD: password
   give-host:
     restart: always
     image: kalpak44/give-host:latest
@@ -9,3 +21,5 @@ services:
     environment:
       PAYMENTS_STRIPE_KEY_PUBLIC: ${PAYMENTS_STRIPE_KEY_PUBLIC}
       PAYMENTS_STRIPE_KEY_SECRET: ${PAYMENTS_STRIPE_KEY_SECRET}
+volumes:
+  db_data: {}
