@@ -3,7 +3,7 @@ services:
   telegram-bot:
     restart: always
     image: kalpak44/give-host:latest
-    container_name: telegram-bot
+    container_name: give-host
     environment:
       PAYMENTS_STRIPE_KEY_PUBLIC: ${PAYMENTS_STRIPE_KEY_PUBLIC}
       PAYMENTS_STRIPE_KEY_SECRET: ${PAYMENTS_STRIPE_KEY_SECRET}
