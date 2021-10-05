@@ -1,6 +1,6 @@
 version: "3.8"
 services:
-  telegram-bot:
+  give-host:
     restart: always
     image: kalpak44/give-host:latest
     container_name: give-host
