@@ -7,4 +7,4 @@ ssh-add ~/.ssh/travis_rsa
 ssh -i ~/.ssh/travis_rsa -o UserKnownHostsFile=/dev/null $VPS_USERNAME@$VPS_HOST "docker version && docker-compose version"
 scp .scripts/docker-compose.yml $VPS_USERNAME@$VPS_HOST:/root/docker-compose
 #scp .scripts/vds-init.sh $VPS_USERNAME@$VPS_HOST:/root/docker-compose
-ssh -i ~/.ssh/travis_rsa $VPS_USERNAME@$VPS_HOST "cd /root/docker-compose && sh vds-init.sh && export PAYMENTS_STRIPE_KEY_PUBLIC=${PAYMENTS_STRIPE_KEY_PUBLIC} && export PAYMENTS_STRIPE_KEY_SECRET=${PAYMENTS_STRIPE_KEY_SECRET} && docker-compose pull && docker-compose up --detach --build"
+ssh -i ~/.ssh/travis_rsa $VPS_USERNAME@$VPS_HOST "cd /root/docker-compose && export PAYMENTS_STRIPE_KEY_PUBLIC=${PAYMENTS_STRIPE_KEY_PUBLIC} && export PAYMENTS_STRIPE_KEY_SECRET=${PAYMENTS_STRIPE_KEY_SECRET} && docker-compose pull && docker-compose up --detach --build"
