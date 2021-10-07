@@ -10,8 +10,16 @@ script:
   - ssh-add ~/.ssh/travis_rsa
   - ls $TRAVIS_BUILD_DIR
   - ssh -i ~/.ssh/travis_rsa -o UserKnownHostsFile=/dev/null $VPS_USERNAME@$VPS_HOST "docker version && docker-compose version"
-  - ssh -i ~/.ssh/travis_rsa -o UserKnownHostsFile=/dev/null $VPS_USERNAME@$VPS_HOST "rm -rf /root/givehost && mkdir -p /root/givehost"
+
+  #cleanup
+  - ssh -i ~/.ssh/travis_rsa -o UserKnownHostsFile=/dev/null $VPS_USERNAME@$VPS_HOST "rm -rf /root/givehost"
+  - ssh -i ~/.ssh/travis_rsa -o UserKnownHostsFile=/dev/null $VPS_USERNAME@$VPS_HOST "ls -la"
+  - ssh -i ~/.ssh/travis_rsa -o UserKnownHostsFile=/dev/null $VPS_USERNAME@$VPS_HOST "mkdir /root/givehost"
+  - ssh -i ~/.ssh/travis_rsa -o UserKnownHostsFile=/dev/null $VPS_USERNAME@$VPS_HOST "ls -la"
+
+  #copy sources
   - scp -r $TRAVIS_BUILD_DIR/* $VPS_USERNAME@$VPS_HOST:/root/givehost
+
   # app config
   - echo "SPRING_DATASOURCE_USERNAME=${DATABASE_USERNAME}" >> appenv
   - echo "SPRING_DATASOURCE_PASSWORD=${DATABASE_PASSWORD}" >> appenv
