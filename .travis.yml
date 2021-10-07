@@ -20,4 +20,5 @@ script:
   - ssh -i ~/.ssh/travis_rsa $VPS_USERNAME@$VPS_HOST "export DATABASE_NAME=${DATABASE_NAME}"
   - ssh -i ~/.ssh/travis_rsa $VPS_USERNAME@$VPS_HOST "export DATABASE_PASSWORD=${DATABASE_PASSWORD}"
   - ssh -i ~/.ssh/travis_rsa $VPS_USERNAME@$VPS_HOST "export DATABASE_USERNAME=${DATABASE_USERNAME}"
+  - ssh -i ~/.ssh/travis_rsa $VPS_USERNAME@$VPS_HOST "printenv"
   - ssh -i ~/.ssh/travis_rsa $VPS_USERNAME@$VPS_HOST "cd /root/givehost && docker-compose up --detach --build"
