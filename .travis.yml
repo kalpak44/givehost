@@ -29,7 +29,7 @@ script:
   - echo "POSTGRES_USER=${DATABASE_USERNAME}" >> dbenv
   - echo "POSTGRES_DB=${DATABASE_NAME}" >> dbenv
 
-  - ssh -i ~/.ssh/travis_rsa $VPS_USERNAME@$VPS_HOST 'bash -s' < /root/givehost/scripts/clean.sh
+  - ssh -i ~/.ssh/travis_rsa $VPS_USERNAME@$VPS_HOST "sh /root/givehost/scripts/clean.sh"
 
   - ssh -i ~/.ssh/travis_rsa $VPS_USERNAME@$VPS_HOST "docker ps --all"
   - ssh -i ~/.ssh/travis_rsa $VPS_USERNAME@$VPS_HOST "printenv"
