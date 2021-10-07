@@ -33,4 +33,4 @@ script:
   - scp appenv $VPS_USERNAME@$VPS_HOST:.givehost/app.env
   - scp dbenv $VPS_USERNAME@$VPS_HOST:.givehost/db.env
 
-  - ssh -i ~/.ssh/travis_rsa $VPS_USERNAME@$VPS_HOST "cd givehost && docker-compose up --detach --build"
+  - ssh -i ~/.ssh/travis_rsa $VPS_USERNAME@$VPS_HOST "cd /root/givehost && docker-compose up --detach --build"
