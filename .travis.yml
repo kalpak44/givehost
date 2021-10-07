@@ -10,7 +10,7 @@ script:
   - ssh-add ~/.ssh/travis_rsa
   - ls $TRAVIS_BUILD_DIR
   - ssh -i ~/.ssh/travis_rsa -o UserKnownHostsFile=/dev/null $VPS_USERNAME@$VPS_HOST "docker version && docker-compose version"
-  - ssh -i ~/.ssh/travis_rsa -o UserKnownHostsFile=/dev/null $VPS_USERNAME@$VPS_HOST "rm -rf givehost && mkdir -p givehost"
+  - ssh -i ~/.ssh/travis_rsa -o UserKnownHostsFile=/dev/null $VPS_USERNAME@$VPS_HOST "rm -rf /root/givehost && mkdir -p /root/givehost"
   - scp -r $TRAVIS_BUILD_DIR/* $VPS_USERNAME@$VPS_HOST:/root/givehost
   # app config
   - echo "SPRING_DATASOURCE_URL=jdbc:postgresql://PostgreSQL:5432/${DATABASE_NAME}" > appenv
@@ -19,8 +19,8 @@ script:
   - echo "SPRING_JPA_HIBERNATE_DDL_AUTO=update" >> appenv
   # db config
   - echo "POSTGRES_PASSWORD=${DATABASE_PASSWORD}" > dbenv
-  - echo "POSTGRES_USER=${DATABASE_USERNAME}" > dbenv
-  - echo "POSTGRES_DB=${DATABASE_NAME}" > dbenv
+  - echo "POSTGRES_USER=${DATABASE_USERNAME}" >> dbenv
+  - echo "POSTGRES_DB=${DATABASE_NAME}" >> dbenv
 
   #- ssh -i ~/.ssh/travis_rsa $VPS_USERNAME@$VPS_HOST "docker stop $(docker ps -aq)"
   #- ssh -i ~/.ssh/travis_rsa $VPS_USERNAME@$VPS_HOST "docker rm $(docker ps -aq)"
