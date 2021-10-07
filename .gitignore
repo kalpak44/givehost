@@ -30,3 +30,4 @@ target/
 dev-build.bat
 
 *.env
+application-dev.yml
