@@ -11,3 +11,6 @@ script:
   - ssh -i ~/.ssh/travis_rsa -o UserKnownHostsFile=/dev/null $VPS_USERNAME@$VPS_HOST "docker version && docker-compose version"
   - ssh -i ~/.ssh/travis_rsa -o UserKnownHostsFile=/dev/null $VPS_USERNAME@$VPS_HOST "mkdir givehost"
   - scp -r . $VPS_USERNAME@$VPS_HOST:/root/givehost
+#  - docker stop $(docker ps -q)
+#  - docker rm $(docker ps -a -q)
+#  - docker rmi $(docker images -q)
