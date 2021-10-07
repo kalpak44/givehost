@@ -9,9 +9,8 @@ script:
   - eval "$(ssh-agent -s)"
   - ssh-add ~/.ssh/travis_rsa
   - ssh -i ~/.ssh/travis_rsa -o UserKnownHostsFile=/dev/null $VPS_USERNAME@$VPS_HOST "docker version && docker-compose version"
-  - ssh -i ~/.ssh/travis_rsa -o UserKnownHostsFile=/dev/null $VPS_USERNAME@$VPS_HOST "mkdir -p givehost"
-  - pwd
-  - scp -r . $VPS_USERNAME@$VPS_HOST:/root/givehost
+  - ssh -i ~/.ssh/travis_rsa -o UserKnownHostsFile=/dev/null $VPS_USERNAME@$VPS_HOST "rm -rf givehost && mkdir -p givehost"
+  - scp -r $(pwd)/* $VPS_USERNAME@$VPS_HOST:/root/givehost
 #  - docker stop $(docker ps -q)
 #  - docker rm $(docker ps -a -q)
 #  - docker rmi $(docker images -q)
