@@ -12,14 +12,14 @@ services:
     environment:
      - SPRING_DATASOURCE_URL=jdbc:postgresql://PostgreSQL:5432/${DATABASE_NAME:postgres}
      - SPRING_DATASOURCE_USERNAME=${DATABASE_USERNAME:postgres}
-     - SPRING_DATASOURCE_PASSWORD==${DATABASE_USERNAME:password}
+     - SPRING_DATASOURCE_PASSWORD==${DATABASE_PASSWORD:password}
      - SPRING_JPA_HIBERNATE_DDL_AUTO=update
   PostgreSQL:
     image: postgres
     ports:
       - "5432:5432"
     environment:
-      - POSTGRES_PASSWORD=${DATABASE_USERNAME:password}
+      - POSTGRES_PASSWORD=${DATABASE_PASSWORD:password}
       - POSTGRES_USER=${DATABASE_USERNAME:postgres}
       - POSTGRES_DB=${DATABASE_NAME:postgres}
     healthcheck:

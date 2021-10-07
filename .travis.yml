@@ -12,9 +12,12 @@ script:
   - ssh -i ~/.ssh/travis_rsa -o UserKnownHostsFile=/dev/null $VPS_USERNAME@$VPS_HOST "rm -rf givehost && mkdir -p givehost"
   - ls $TRAVIS_BUILD_DIR
   - scp -r $TRAVIS_BUILD_DIR/* $VPS_USERNAME@$VPS_HOST:/root/givehost
-  #- docker stop $(docker ps -q)
-  #- docker rm $(docker ps -a -q)
-  #- docker rmi $(docker images -q)
-  - docker ps
+  - ssh -i ~/.ssh/travis_rsa $VPS_USERNAME@$VPS_HOST "docker stop $(docker ps -q)"
+  - ssh -i ~/.ssh/travis_rsa $VPS_USERNAME@$VPS_HOST "docker rm $(docker ps -a -q)"
+  - ssh -i ~/.ssh/travis_rsa $VPS_USERNAME@$VPS_HOST "docker rmi $(docker images -q)"
+  - ssh -i ~/.ssh/travis_rsa $VPS_USERNAME@$VPS_HOST "docker ps --all"
   - ssh -i ~/.ssh/travis_rsa $VPS_USERNAME@$VPS_HOST "ls /root/givehost"
+  - ssh -i ~/.ssh/travis_rsa $VPS_USERNAME@$VPS_HOST "export DATABASE_NAME=${DATABASE_NAME}"
+  - ssh -i ~/.ssh/travis_rsa $VPS_USERNAME@$VPS_HOST "export DATABASE_PASSWORD=${DATABASE_PASSWORD}"
+  - ssh -i ~/.ssh/travis_rsa $VPS_USERNAME@$VPS_HOST "export DATABASE_USERNAME=${DATABASE_USERNAME}"
   - ssh -i ~/.ssh/travis_rsa $VPS_USERNAME@$VPS_HOST "cd /root/givehost && docker-compose up --detach --build"
