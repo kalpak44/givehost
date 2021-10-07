@@ -8,17 +8,18 @@ script:
   - chmod 600 ~/.ssh/travis_rsa
   - eval "$(ssh-agent -s)"
   - ssh-add ~/.ssh/travis_rsa
+  - ls $TRAVIS_BUILD_DIR
   - ssh -i ~/.ssh/travis_rsa -o UserKnownHostsFile=/dev/null $VPS_USERNAME@$VPS_HOST "docker version && docker-compose version"
   - ssh -i ~/.ssh/travis_rsa -o UserKnownHostsFile=/dev/null $VPS_USERNAME@$VPS_HOST "rm -rf givehost && mkdir -p givehost"
-  - ls $TRAVIS_BUILD_DIR
   - scp -r $TRAVIS_BUILD_DIR/* $VPS_USERNAME@$VPS_HOST:/root/givehost
-  - ssh -i ~/.ssh/travis_rsa $VPS_USERNAME@$VPS_HOST "docker stop $(docker ps -q)"
-  - ssh -i ~/.ssh/travis_rsa $VPS_USERNAME@$VPS_HOST "docker rm $(docker ps -a -q)"
-  - ssh -i ~/.ssh/travis_rsa $VPS_USERNAME@$VPS_HOST "docker rmi $(docker images -q)"
+  - echo "DATABASE_NAME=${DATABASE_NAME}" > sshenv
+  - echo "DATABASE_PASSWORD=${DATABASE_PASSWORD}" >> sshenv
+  - echo "DATABASE_USERNAME=${DATABASE_USERNAME}" >> sshenv
+  - scp sshenv user@server:.ssh/environment
+  - ssh -i ~/.ssh/travis_rsa $VPS_USERNAME@$VPS_HOST "docker stop $(docker ps -aq)"
+  - ssh -i ~/.ssh/travis_rsa $VPS_USERNAME@$VPS_HOST "docker rm $(docker ps -aq)"
+  - ssh -i ~/.ssh/travis_rsa $VPS_USERNAME@$VPS_HOST "docker rmi $(docker images -qa)"
   - ssh -i ~/.ssh/travis_rsa $VPS_USERNAME@$VPS_HOST "docker ps --all"
-  - ssh -i ~/.ssh/travis_rsa $VPS_USERNAME@$VPS_HOST "ls /root/givehost"
-  - ssh -i ~/.ssh/travis_rsa $VPS_USERNAME@$VPS_HOST "export DATABASE_NAME=${DATABASE_NAME}"
-  - ssh -i ~/.ssh/travis_rsa $VPS_USERNAME@$VPS_HOST "export DATABASE_PASSWORD=${DATABASE_PASSWORD}"
-  - ssh -i ~/.ssh/travis_rsa $VPS_USERNAME@$VPS_HOST "export DATABASE_USERNAME=${DATABASE_USERNAME}"
+  - ssh -i ~/.ssh/travis_rsa $VPS_USERNAME@$VPS_HOST "ls givehost"
   - ssh -i ~/.ssh/travis_rsa $VPS_USERNAME@$VPS_HOST "printenv"
-  - ssh -i ~/.ssh/travis_rsa $VPS_USERNAME@$VPS_HOST "cd /root/givehost && docker-compose up --detach --build"
+  - ssh -i ~/.ssh/travis_rsa $VPS_USERNAME@$VPS_HOST "cd givehost && docker-compose up --detach --build"
