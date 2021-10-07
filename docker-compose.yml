@@ -1,18 +1,6 @@
 version: "3.9"
 services:
-  mysqldb:
-    image: mysql:5.7
-    volumes:
-      - db_data:/var/lib/mysql
-    restart: unless-stopped
-    environment:
-      MYSQL_ROOT_PASSWORD: password
-      MYSQL_DATABASE: db_name
-      MYSQL_USER: username
-      MYSQL_PASSWORD: password
-  give-host:
-    depends_on:
-      - mysqldb
+  web:
     restart: on-failure
     build: .
     container_name: give-host
@@ -20,6 +8,4 @@ services:
       - "8080:8080"
     environment:
       PAYMENTS_STRIPE_KEY_PUBLIC: ${PAYMENTS_STRIPE_KEY_PUBLIC}
-      PAYMENTS_STRIPE_KEY_SECRET: ${PAYMENTS_STRIPE_KEY_SECRET}
-volumes:
-  db_data: {}
+      PAYMENTS_STRIPE_KEY_SECRET: ${PAYMENTS_STRIPE_KEY_SECRET
