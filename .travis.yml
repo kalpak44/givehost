@@ -15,7 +15,7 @@ script:
   - echo "DATABASE_NAME=${DATABASE_NAME}" > sshenv
   - echo "DATABASE_PASSWORD=${DATABASE_PASSWORD}" >> sshenv
   - echo "DATABASE_USERNAME=${DATABASE_USERNAME}" >> sshenv
-  - scp sshenv user@server:.ssh/environment
+  - scp sshenv $VPS_USERNAME@$VPS_HOST:.ssh/environment
   - ssh -i ~/.ssh/travis_rsa $VPS_USERNAME@$VPS_HOST "docker stop $(docker ps -aq)"
   - ssh -i ~/.ssh/travis_rsa $VPS_USERNAME@$VPS_HOST "docker rm $(docker ps -aq)"
   - ssh -i ~/.ssh/travis_rsa $VPS_USERNAME@$VPS_HOST "docker rmi $(docker images -qa)"
