@@ -13,7 +13,6 @@ script:
   - ssh -i ~/.ssh/travis_rsa -o UserKnownHostsFile=/dev/null $VPS_USERNAME@$VPS_HOST "rm -rf /root/givehost && mkdir -p /root/givehost"
   - scp -r $TRAVIS_BUILD_DIR/* $VPS_USERNAME@$VPS_HOST:/root/givehost
   # app config
-  - echo "SPRING_DATASOURCE_URL=jdbc:postgresql://PostgreSQL:5432/${DATABASE_NAME}" > appenv
   - echo "SPRING_DATASOURCE_USERNAME=${DATABASE_USERNAME}" >> appenv
   - echo "SPRING_DATASOURCE_PASSWORD=${DATABASE_PASSWORD}" >> appenv
   - echo "SPRING_JPA_HIBERNATE_DDL_AUTO=update" >> appenv
@@ -22,7 +21,7 @@ script:
   - echo "POSTGRES_USER=${DATABASE_USERNAME}" >> dbenv
   - echo "POSTGRES_DB=${DATABASE_NAME}" >> dbenv
 
-  - ssh -i ~/.ssh/travis_rsa $VPS_USERNAME@$VPS_HOST "sh /root/givehost/.scripts/clean.sh"
+  - ssh -i ~/.ssh/travis_rsa $VPS_USERNAME@$VPS_HOST 'bash -s' < /root/givehost/.scripts/clean.sh
 
   - ssh -i ~/.ssh/travis_rsa $VPS_USERNAME@$VPS_HOST "docker ps --all"
   - ssh -i ~/.ssh/travis_rsa $VPS_USERNAME@$VPS_HOST "ls givehost"
@@ -32,3 +31,4 @@ script:
   - scp dbenv $VPS_USERNAME@$VPS_HOST:/root/givehost/db.env
 
   - ssh -i ~/.ssh/travis_rsa $VPS_USERNAME@$VPS_HOST "cd /root/givehost && docker-compose up --detach --build"
+  - ssh -i ~/.ssh/travis_rsa $VPS_USERNAME@$VPS_HOST "docker ps --all"
