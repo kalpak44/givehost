@@ -10,3 +10,4 @@ RUN mkdir /app
 COPY --from=build /project/target/web.jar /app/web.jar
 WORKDIR /app
 CMD "java" "-jar" "web.jar"
+EXPOSE 8080
