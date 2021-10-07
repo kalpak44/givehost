@@ -15,16 +15,14 @@ script:
   # app config
   - echo "SPRING_DATASOURCE_URL=jdbc:postgresql://PostgreSQL:5432/${DATABASE_NAME}" > appenv
   - echo "SPRING_DATASOURCE_USERNAME=${DATABASE_USERNAME}" >> appenv
-  - echo "SPRING_DATASOURCE_PASSWORD==${DATABASE_PASSWORD}" >> appenv
+  - echo "SPRING_DATASOURCE_PASSWORD=${DATABASE_PASSWORD}" >> appenv
   - echo "SPRING_JPA_HIBERNATE_DDL_AUTO=update" >> appenv
   # db config
   - echo "POSTGRES_PASSWORD=${DATABASE_PASSWORD}" > dbenv
   - echo "POSTGRES_USER=${DATABASE_USERNAME}" >> dbenv
   - echo "POSTGRES_DB=${DATABASE_NAME}" >> dbenv
 
-  #- ssh -i ~/.ssh/travis_rsa $VPS_USERNAME@$VPS_HOST "docker stop $(docker ps -aq)"
-  #- ssh -i ~/.ssh/travis_rsa $VPS_USERNAME@$VPS_HOST "docker rm $(docker ps -aq)"
-  #- ssh -i ~/.ssh/travis_rsa $VPS_USERNAME@$VPS_HOST "docker rmi $(docker images -qa)"
+  - ssh -i ~/.ssh/travis_rsa $VPS_USERNAME@$VPS_HOST "sh /root/givehost/.scripts/clean.sh"
 
   - ssh -i ~/.ssh/travis_rsa $VPS_USERNAME@$VPS_HOST "docker ps --all"
   - ssh -i ~/.ssh/travis_rsa $VPS_USERNAME@$VPS_HOST "ls givehost"
