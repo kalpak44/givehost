@@ -14,7 +14,7 @@ services:
     depends_on:
       - mysqldb
     restart: on-failure
-    image: kalpak44/give-host:latest
+    build: .
     container_name: give-host
     ports:
       - "8080:8080"
