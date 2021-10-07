@@ -8,17 +8,17 @@ script:
   - chmod 600 ~/.ssh/travis_rsa
   - eval "$(ssh-agent -s)"
   - ssh-add ~/.ssh/travis_rsa
-  - ls $TRAVIS_BUILD_DIR
+  - ls -la $TRAVIS_BUILD_DIR
   - ssh -i ~/.ssh/travis_rsa -o UserKnownHostsFile=/dev/null $VPS_USERNAME@$VPS_HOST "docker version && docker-compose version"
 
   #cleanup
   - ssh -i ~/.ssh/travis_rsa -o UserKnownHostsFile=/dev/null $VPS_USERNAME@$VPS_HOST "rm -rf /root/givehost"
   - ssh -i ~/.ssh/travis_rsa -o UserKnownHostsFile=/dev/null $VPS_USERNAME@$VPS_HOST "ls -la /root/"
   - ssh -i ~/.ssh/travis_rsa -o UserKnownHostsFile=/dev/null $VPS_USERNAME@$VPS_HOST "mkdir /root/givehost"
-  - ssh -i ~/.ssh/travis_rsa -o UserKnownHostsFile=/dev/null $VPS_USERNAME@$VPS_HOST "ls -la /root/givehost"
-
   #copy sources
   - scp -r $TRAVIS_BUILD_DIR/* $VPS_USERNAME@$VPS_HOST:/root/givehost
+  - ssh -i ~/.ssh/travis_rsa -o UserKnownHostsFile=/dev/null $VPS_USERNAME@$VPS_HOST "ls -la /root/givehost"
+
 
   # app config
   - echo "SPRING_DATASOURCE_USERNAME=${DATABASE_USERNAME}" >> appenv
@@ -29,7 +29,7 @@ script:
   - echo "POSTGRES_USER=${DATABASE_USERNAME}" >> dbenv
   - echo "POSTGRES_DB=${DATABASE_NAME}" >> dbenv
 
-  - ssh -i ~/.ssh/travis_rsa $VPS_USERNAME@$VPS_HOST 'bash -s' < /root/givehost/.scripts/clean.sh
+  - ssh -i ~/.ssh/travis_rsa $VPS_USERNAME@$VPS_HOST 'bash -s' < /root/givehost/scripts/clean.sh
 
   - ssh -i ~/.ssh/travis_rsa $VPS_USERNAME@$VPS_HOST "docker ps --all"
   - ssh -i ~/.ssh/travis_rsa $VPS_USERNAME@$VPS_HOST "ls givehost"
