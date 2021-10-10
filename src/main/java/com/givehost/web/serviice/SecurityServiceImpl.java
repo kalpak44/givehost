@@ -2,6 +2,7 @@ package com.givehost.web.serviice;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -19,7 +20,7 @@ public class SecurityServiceImpl implements SecurityService {
 
     private static final Logger logger = LoggerFactory.getLogger(SecurityServiceImpl.class);
 
-    public SecurityServiceImpl(AuthenticationManager authenticationManager, UserDetailsService userDetailsService) {
+    public SecurityServiceImpl(AuthenticationManager authenticationManager, @Qualifier("userDetail") UserDetailsService userDetailsService) {
         this.authenticationManager = authenticationManager;
         this.userDetailsService = userDetailsService;
     }
@@ -38,7 +39,11 @@ public class SecurityServiceImpl implements SecurityService {
         UserDetails userDetails = userDetailsService.loadUserByUsername(username);
         UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken = new UsernamePasswordAuthenticationToken(userDetails, password, userDetails.getAuthorities());
 
-        authenticationManager.authenticate(usernamePasswordAuthenticationToken);
+       /* try {
+            authenticationManager.authenticate(usernamePasswordAuthenticationToken);
+        }catch (Exception e){
+            logger.warn(e.getMessage(), e);
+        }*/
 
         if (usernamePasswordAuthenticationToken.isAuthenticated()) {
             SecurityContextHolder.getContext().setAuthentication(usernamePasswordAuthenticationToken);

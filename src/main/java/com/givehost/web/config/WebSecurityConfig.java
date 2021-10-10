@@ -17,8 +17,6 @@ import org.springframework.security.web.authentication.AuthenticationSuccessHand
 @Configuration
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
-    @Qualifier("userDetailsServiceImpl")
-
     private UserDetailsService userDetailsService;
 
     public WebSecurityConfig(@Qualifier("userDetail") UserDetailsService userDetailsService) {
@@ -39,33 +37,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     public AuthenticationFailureHandler authenticationFailureHandler() {
         return new AuthenticationFailureHandlerImpl();
     }
-
-
-    @Override
-    protected void configure(HttpSecurity http) throws Exception {
-        http.csrf().disable().cors().disable()
-                .authorizeRequests()
-                //.antMatchers(HttpMethod.POST, "/sign-in").permitAll()
-                .antMatchers("/assets/**", "/sign-up", "/").permitAll()
-                .anyRequest().authenticated()
-                .and()
-                .formLogin()
-                .loginPage("/")
-                .loginProcessingUrl("/sign-in")
-                .permitAll()
-                .usernameParameter("email")
-                .passwordParameter("password")
-                .successHandler(authenticationSuccessHandler())
-                .failureHandler(authenticationFailureHandler())
-                .permitAll()
-                .and()
-                .logout()
-                .permitAll();
-
-        //.addFilterAfter(rememberMeAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class);
-
-    }
-
     @Bean
     public AuthenticationManager customAuthenticationManager() throws Exception {
         return authenticationManager();
@@ -75,4 +46,28 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
         auth.userDetailsService(userDetailsService).passwordEncoder(bCryptPasswordEncoder());
     }
+
+
+    @Override
+    protected void configure(HttpSecurity http) throws Exception {
+        http.csrf().disable().cors().disable()
+                .authorizeRequests()
+                .antMatchers("/assets/**", "/sign-up", "/").permitAll()
+                .anyRequest().authenticated()
+                .and()
+                .formLogin()
+                .loginPage("/")
+                .loginProcessingUrl("/sign-in")
+                .usernameParameter("email")
+                .passwordParameter("password")
+                .successHandler(authenticationSuccessHandler())
+                .failureHandler(authenticationFailureHandler())
+                .permitAll()
+                .and()
+                .logout()
+                .permitAll();
+
+    }
+
+
 }

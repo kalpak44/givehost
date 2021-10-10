@@ -30,8 +30,6 @@ public class SignUpController {
 
     @PostMapping("/sign-up")
     public String signUp(Model model, @ModelAttribute User user) {
-        model.addAttribute("names", user.getNames());
-        model.addAttribute("email", user.getEmail());
         if (!validNames(user.getNames())) {
             model.addAttribute("success", false);
             model.addAttribute("message", "names should contains at least 2 characters");
@@ -70,6 +68,6 @@ public class SignUpController {
     }
 
     private boolean validNames(String names) {
-        return names != null && !names.isEmpty() && names.length() > 4 && names.length() < 255;
+        return names != null && !names.isEmpty() && names.length() >= 2 && names.length() <= 255;
     }
 }
