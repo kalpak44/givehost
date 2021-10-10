@@ -54,6 +54,11 @@
                         <p class="d-lg-none d-xl-none">Instagram</p>
                     </a>
                 </li>
+                <li class="nav-item nav-link">
+                    <a href="#" data-toggle="modal" data-target="#sign-in-modal" class="nav-link">
+                        Sign In
+                    </a>
+                </li>
                 <li class="nav-item">
                     <a class="nav-link" href="../index.html">Back to Kit</a>
                 </li>
@@ -229,6 +234,55 @@
                     </div>
                 </div>
             </div>
+            <!-- sign in modal -->
+            <div class="modal fade modal-black" id="sign-in-modal" tabindex="-1" role="dialog"
+                 aria-labelledby="myModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header justify-content-center">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                                <i class="tim-icons icon-simple-remove text-white"></i>
+                            </button>
+                            <div class="text-muted text-center ml-auto mr-auto">
+                                <h3 class="mb-0">Sign in with</h3>
+                            </div>
+                        </div>
+                        <div class="modal-body">
+
+                            <div class="text-center text-muted mb-4 mt-3">
+                                <small>Sign in with credentials</small>
+                            </div>
+                            <form role="form" id="sign-in">
+                                <div class="form-group mb-3">
+                                    <div class="input-group input-group-alternative">
+                                        <div class="input-group-prepend">
+                                          <span class="input-group-text" style="padding-right: 19px;">
+                                            <i class="tim-icons icon-email-85"></i>
+                                          </span>
+                                        </div>
+                                        <input class="form-control" placeholder="Email" type="email" name="email">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="input-group input-group-alternative">
+                                        <div class="input-group-prepend">
+                                          <span class="input-group-text" style="padding-right: 19px;">
+                                            <i class="tim-icons icon-key-25"></i>
+                                          </span>
+                                        </div>
+                                        <input class="form-control" placeholder="Password" type="password" name="password">
+                                    </div>
+                                </div>
+                                <div class="text-center">
+                                    <button type="button" class="btn btn-primary my-4" onclick="signIn()">Sign in</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- sign in modal -->
+
         </div>
     </footer>
 </div>
@@ -240,6 +294,27 @@
         } else {
             $("#alert-container").html('<div class="alert alert-warning alert-with-icon"> <button type="button" aria-hidden="true" class="close" data-dismiss="alert" aria-label="Close"> <i class="tim-icons icon-simple-remove"></i> </button> <span data-notify="icon" class="tim-icons icon-bulb-63"></span> <span> <b> Warning! - </b>You must agree with terms and conditions to continue registration</span> </div>');
         }
+    }
+
+    function signIn() {
+        let credentials = $('#sign-in').serializeJSON();
+        $.ajax({
+            url: '/sign-in',
+            type: 'post',
+            dataType: 'json',
+            contentType: 'application/x-www-form-urlencoded',
+            success: function (data) {
+                location.reload();
+            },
+            error: function (XMLHttpRequest, textStatus, errorThrown) {
+                console.log(textStatus);
+                console.log(errorThrown);
+                alert("some error");
+            },
+            data: Object.keys(credentials).map((key) => {
+                return encodeURIComponent(key) + '=' + encodeURIComponent(credentials[key]);
+            }).join('&')
+        });
     }
 </script>
 
