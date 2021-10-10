@@ -1,4 +1,3 @@
-
 /*
  =========================================================
  * Blk• Design System - v1.0.0
@@ -14,7 +13,7 @@
 
  */
 
- // Core
+// Core
 
 @import "blk-design-system/custom/functions";
 @import "blk-design-system/bootstrap/functions";
@@ -25,7 +24,7 @@
 @import "blk-design-system/custom/mixins";
 @import "blk-design-system/bootstrap/mixins";
 
- // Bootstrap components
+// Bootstrap components
 
 @import "blk-design-system/bootstrap/root";
 @import "blk-design-system/bootstrap/reboot";
@@ -60,45 +59,42 @@
 @import "blk-design-system/bootstrap/utilities";
 @import "blk-design-system/bootstrap/print";
 
- // Custom components
+// Custom components
 
- @import "blk-design-system/custom/alerts.scss";
- @import "blk-design-system/custom/buttons.scss";
- @import "blk-design-system/custom/dropdown.scss";
- @import "blk-design-system/custom/footer.scss";
- @import "blk-design-system/custom/forms.scss";
- @import "blk-design-system/custom/images.scss";
- @import "blk-design-system/custom/modal.scss";
- @import "blk-design-system/custom/navbar.scss";
- @import "blk-design-system/custom/type.scss";
- @import "blk-design-system/custom/icons.scss";
- @import "blk-design-system/custom/tables";
- @import "blk-design-system/custom/checkboxes-radio";
- @import "blk-design-system/custom/fixed-plugin";
- @import "blk-design-system/custom/pagination.scss";
- @import "blk-design-system/custom/misc.scss";
- @import "blk-design-system/custom/rtl.scss";
- @import "blk-design-system/custom/input-group.scss";
- @import "blk-design-system/custom/example-pages.scss";
- @import "blk-design-system/custom/progress.scss";
- @import "blk-design-system/custom/badge.scss";
- @import "blk-design-system/custom/pills.scss";
- @import "blk-design-system/custom/tabs.scss";
- @import "blk-design-system/custom/info-areas.scss";
+@import "blk-design-system/custom/alerts.scss";
+@import "blk-design-system/custom/buttons.scss";
+@import "blk-design-system/custom/dropdown.scss";
+@import "blk-design-system/custom/footer.scss";
+@import "blk-design-system/custom/forms.scss";
+@import "blk-design-system/custom/images.scss";
+@import "blk-design-system/custom/modal.scss";
+@import "blk-design-system/custom/navbar.scss";
+@import "blk-design-system/custom/type.scss";
+@import "blk-design-system/custom/icons.scss";
+@import "blk-design-system/custom/tables";
+@import "blk-design-system/custom/checkboxes-radio";
+@import "blk-design-system/custom/fixed-plugin";
+@import "blk-design-system/custom/pagination.scss";
+@import "blk-design-system/custom/misc.scss";
+@import "blk-design-system/custom/rtl.scss";
+@import "blk-design-system/custom/input-group.scss";
+@import "blk-design-system/custom/example-pages.scss";
+@import "blk-design-system/custom/progress.scss";
+@import "blk-design-system/custom/badge.scss";
+@import "blk-design-system/custom/pills.scss";
+@import "blk-design-system/custom/tabs.scss";
+@import "blk-design-system/custom/info-areas.scss";
 
 // Sections
 @import "blk-design-system/custom/sections.scss";
 
-
-
- // Vendor / Plugins
+// Vendor / Plugins
 
 @import "blk-design-system/custom/vendor/plugin-perfect-scrollbar.scss";
 @import "blk-design-system/custom/vendor/plugin-animate-bootstrap-notify.scss";
 @import "blk-design-system/custom/vendor/plugin-bootstrap-switch.scss";
 @import "blk-design-system/custom/vendor/plugin-nouislider.scss";
 @import "blk-design-system/custom/vendor/plugin-datetimepicker.scss";
-
 
 // Cards
 

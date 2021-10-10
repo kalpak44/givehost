@@ -4,10 +4,10 @@ spring:
       ddl-auto: create
     database-platform: org.hibernate.dialect.PostgreSQLDialect
   datasource:
-      driverClassName: org.postgresql.Driver
-      password: <database_password>
-      url: jdbc:postgresql://localhost:5432/postgres
-      username: <database_username>
+    driverClassName: org.postgresql.Driver
+    password: <database_password>
+    url: jdbc:postgresql://localhost:5432/postgres
+    username: <database_username>
   thymeleaf:
-      prefix: classpath:/templates
-      suffix: .html
+    prefix: classpath:/templates
+    suffix: .html
