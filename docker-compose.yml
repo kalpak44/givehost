@@ -5,7 +5,7 @@ services:
     build: .
     container_name: give-host
     ports:
-      - "8080:8080"
+      - "8080:443"
     depends_on:
       PostgreSQL:
         condition: service_healthy
@@ -17,8 +17,6 @@ services:
       - isolated_nw
   PostgreSQL:
     image: postgres:alpine
-    ports:
-      - "5432:5432"
     env_file:
       - db.env
     volumes:
