@@ -12,7 +12,7 @@ services:
     env_file:
       - app.env
     volumes:
-    - letsencrypt:/etc/letsencrypt
+    - /etc/letsencrypt:/etc/letsencrypt
   PostgreSQL:
     image: postgres:alpine
     ports:
@@ -28,4 +28,3 @@ services:
       retries: 5
 volumes:
   database-data:
-  letsencrypt: /etc/letsencrypt
