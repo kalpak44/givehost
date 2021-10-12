@@ -25,6 +25,5 @@ services:
       timeout: 5s
       retries: 5
 volumes:
-  volumes:
-    - /etc/letsencrypt:/etc/letsencrypt
-    - database-data:
+  - database-data:
+  - /etc/letsencrypt:/etc/letsencrypt
