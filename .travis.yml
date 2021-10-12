@@ -25,12 +25,25 @@ script:
   - echo "SPRING_DATASOURCE_USERNAME=${DATABASE_USERNAME}" >> appenv
   - echo "SPRING_DATASOURCE_PASSWORD=${DATABASE_PASSWORD}" >> appenv
   - echo "SPRING_JPA_HIBERNATE_DDL_AUTO=update" >> appenv
+  - echo "SERVER_SSL_KEYSTOREPASSWORD=${KEYSTOREPASSWORD}" >> appenv
+
   # db config
   - echo "POSTGRES_PASSWORD=${DATABASE_PASSWORD}" > dbenv
   - echo "POSTGRES_USER=${DATABASE_USERNAME}" >> dbenv
   - echo "POSTGRES_DB=${DATABASE_NAME}" >> dbenv
 
   - ssh -i ~/.ssh/travis_rsa $VPS_USERNAME@$VPS_HOST "sh /root/givehost/scripts/clean.sh"
+
+  #let's encrypt
+  #- ssh -i ~/.ssh/travis_rsa $VPS_USERNAME@$VPS_HOST "apt install snapd -y"
+  #- ssh -i ~/.ssh/travis_rsa $VPS_USERNAME@$VPS_HOST "snapd --version"
+  #- ssh -i ~/.ssh/travis_rsa $VPS_USERNAME@$VPS_HOST "snap install core; snap refresh core"
+  #- ssh -i ~/.ssh/travis_rsa $VPS_USERNAME@$VPS_HOST "snap install --classic certbot"
+  #- ssh -i ~/.ssh/travis_rsa $VPS_USERNAME@$VPS_HOST "ln -s /snap/bin/certbot /usr/bin/certbot -f"
+  #- ssh -i ~/.ssh/travis_rsa $VPS_USERNAME@$VPS_HOST "certbot --version"
+  #- ssh -i ~/.ssh/travis_rsa $VPS_USERNAME@$VPS_HOST "certbot-auto certonly -a standalone -d givehost.me"
+  #- ssh -i ~/.ssh/travis_rsa $VPS_USERNAME@$VPS_HOST "cd /etc/letsencrypt/live/givehost.me/"
+  #- ssh -i ~/.ssh/travis_rsa $VPS_USERNAME@$VPS_HOST "givehost.me# openssl pkcs12 -export -in fullchain.pem -inkey privkey.pem -out keystore.p12 -name tomcat  -CAfile chain.pem -caname root"
 
   - ssh -i ~/.ssh/travis_rsa $VPS_USERNAME@$VPS_HOST "docker ps --all"
   - ssh -i ~/.ssh/travis_rsa $VPS_USERNAME@$VPS_HOST "printenv"

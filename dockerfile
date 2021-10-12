@@ -8,6 +8,7 @@ RUN mvn clean package
 FROM adoptopenjdk/openjdk11:jre-11.0.9.1_1-alpine@sha256:b6ab039066382d39cfc843914ef1fc624aa60e2a16ede433509ccadd6d995b1f
 RUN mkdir /app
 COPY --from=build /project/target/web.jar /app/web.jar
+COPY /etc/letsencrypt/live/givehost.me/keystore.p12 /etc/letsencrypt/live/givehost.me/keystore.p12
 WORKDIR /app
 CMD "java" "-jar" "web.jar"
 EXPOSE 8080
