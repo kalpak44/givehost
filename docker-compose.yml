@@ -11,18 +11,23 @@ services:
         condition: service_healthy
     env_file:
       - app.env
+    volumes:
+    - /etc/letsencrypt:/etc/letsencrypt
+    networks:
+      - isolated_nw
   PostgreSQL:
     image: postgres:alpine
-    ports:
-      - "5432:5432"
     env_file:
       - db.env
     volumes:
-      - database-data:/var/lib/postgresql/data/
+      - /root/dockvolumes/database-data:/var/lib/postgresql/data/
+    networks:
+      - isolated_nw
     healthcheck:
       test: [ "CMD-SHELL", "pg_isready -U postgres" ]
       interval: 10s
       timeout: 5s
       retries: 5
-volumes:
-  database-data:
+networks:
+  isolated_nw:
+    driver: bridge
