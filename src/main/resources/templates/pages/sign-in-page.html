@@ -55,12 +55,12 @@
                     </a>
                 </li>
                 <li class="nav-item nav-link">
-                    <a href="/sign-in" class="nav-link">
-                        Sign In
+                    <a href="/sign-up" class="nav-link">
+                        Registration
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="../index.html">Back to Kit</a>
+                    <a class="nav-link" href="./index.html">Back to Kit</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="https://github.com/creativetimofficial/blk-design-system/issues">Have an
@@ -82,37 +82,12 @@
                         <div id="square8" class="square square-8"></div>
                         <div class="card card-register">
                             <div class="card-header">
-                                <img class="card-img" src="../assets/img/square1.png" alt="Card image">
-                                <h4 class="card-title" style="margin-left: 4px">Register</h4>
+                                <img class="card-img" src="./assets/img/square1.png" alt="Card image">
+                                <h4 class="card-title" style="margin-left: 4px">SignIn</h4>
                             </div>
                             <div class="card-body">
-                                <form class="form" id="sign-up" method="post">
+                                <form class="form" id="sign-in" method="post">
                                     <div class="input-group" id="alert-container">
-                                        <th:block th:if="${success != null}">
-                                            <th:block th:switch="${success}">
-                                                <th:block th:case="true">
-                                                    ok
-                                                </th:block>
-                                                <th:block th:case="false">
-                                                    <div class="alert alert-warning alert-with-icon">
-                                                        <button type="button" aria-hidden="true" class="close"
-                                                                data-dismiss="alert" aria-label="Close"><i
-                                                                class="tim-icons icon-simple-remove"></i></button>
-                                                        <span data-notify="icon" class="tim-icons icon-bulb-63"></span>
-                                                        <span> <b> Ops! - </b><th:block th:text="${message}"></th:block></span>
-                                                    </div>
-                                                </th:block>
-                                            </th:block>
-                                        </th:block>
-                                    </div>
-                                    <div class="input-group">
-                                        <div class="input-group-prepend">
-                                            <div class="input-group-text">
-                                                <i class="tim-icons icon-single-02"></i>
-                                            </div>
-                                        </div>
-                                        <input type="text" class="form-control" name="names"
-                                               placeholder="Full Name">
                                     </div>
                                     <div class="input-group">
                                         <div class="input-group-prepend">
@@ -132,18 +107,10 @@
                                         <input type="password" class="form-control" name="password"
                                                placeholder="Password">
                                     </div>
-                                    <div class="form-check text-left">
-                                        <label class="form-check-label">
-                                            <input class="form-check-input" type="checkbox" id="conditions">
-                                            <span class="form-check-sign"></span>
-                                            I agree to the
-                                            <a href="javascript:void(0)">terms and conditions</a>.
-                                        </label>
-                                    </div>
                                 </form>
                             </div>
                             <div class="card-footer">
-                                <a href="javascript:void(0)" class="btn btn-info btn-round btn-lg" onclick="signUp()">Get
+                                <a href="javascript:void(0)" class="btn btn-info btn-round btn-lg" onclick="signIn()">Get
                                     Started</a>
                             </div>
                         </div>
@@ -168,22 +135,22 @@
                 <div class="col-md-3">
                     <ul class="nav">
                         <li class="nav-item">
-                            <a href="../index.html" class="nav-link">
+                            <a href="./index.html" class="nav-link">
                                 Home
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="../examples/landing-page.html" class="nav-link">
+                            <a href="./examples/landing-page.html" class="nav-link">
                                 Landing
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="../examples/register-page.html" class="nav-link">
+                            <a href="./examples/register-page.html" class="nav-link">
                                 Register
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="../examples/profile-page.html" class="nav-link">
+                            <a href="./examples/profile-page.html" class="nav-link">
                                 Profile
                             </a>
                         </li>
@@ -239,12 +206,25 @@
 </div>
 <div th:replace="/fragments/scripts.html :: scripts"></div>
 <script>
-    function signUp() {
-        if ($('#conditions').prop("checked")) {
-            $("#sign-up").submit();
-        } else {
-            $("#alert-container").html('<div class="alert alert-warning alert-with-icon"> <button type="button" aria-hidden="true" class="close" data-dismiss="alert" aria-label="Close"> <i class="tim-icons icon-simple-remove"></i> </button> <span data-notify="icon" class="tim-icons icon-bulb-63"></span> <span> <b> Warning! - </b>You must agree with terms and conditions to continue registration</span> </div>');
-        }
+    function signIn() {
+        let credentials = $("#sign-in").serializeJSON();
+        $.ajax({
+            url: '/sign-in',
+            type: 'post',
+            dataType: 'json',
+            contentType: 'application/x-www-form-urlencoded',
+            success: function (data) {
+                location.reload();
+            },
+            error: function (XMLHttpRequest, textStatus, errorThrown) {
+                console.log(textStatus);
+                console.log(errorThrown);
+                $("#alert-container").html('<div class="alert alert-warning alert-with-icon"> <button type="button" aria-hidden="true" class="close" data-dismiss="alert" aria-label="Close"> <i class="tim-icons icon-simple-remove"></i> </button> <span data-notify="icon" class="tim-icons icon-bulb-63"></span> <span> <b> Ops! - </b>Credentials is wrong</span> </div>');
+            },
+            data: Object.keys(credentials).map((key) => {
+                return encodeURIComponent(key) + '=' + encodeURIComponent(credentials[key]);
+            }).join('&')
+        });
     }
 </script>
 
