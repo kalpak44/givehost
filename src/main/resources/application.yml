@@ -1,12 +1,10 @@
-server.port: 443
-security:
-  require-ssl: true
 server:
   ssl:
     key-store: /etc/letsencrypt/live/givehost.me/keystore.p12
     key-store-password: <password>
     keyStoreType: PKCS12
     keyAlias: tomcat
+  port: 443
 spring:
   jpa:
     hibernate:

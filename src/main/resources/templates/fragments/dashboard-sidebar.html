@@ -1,0 +1,43 @@
+<div class="sidebar" th:fragment="dashboard-header" xmlns:th="http://www.thymeleaf.org">
+    <!--
+      Tip 1: You can change the color of the sidebar using: data-color="blue | green | orange | red"
+  -->
+    <div class="sidebar-wrapper">
+        <div class="logo">
+            <a href="/" class="simple-text logo-mini">
+                *
+            </a>
+            <a href="/" class="simple-text logo-normal">
+                givehostme
+            </a>
+        </div>
+        <ul class="nav">
+            <li class="active ">
+                <a href="/">
+                    <i class="tim-icons icon-chart-pie-36"></i>
+                    <p>Dashboard</p>
+                </a>
+            </li>
+            <li class="active ">
+                <a href="/vps">
+                    <i class="tim-icons icon-chart-pie-36"></i>
+                    <p>VPS</p>
+                </a>
+            </li>
+            <li class="active ">
+                <a href="/hosting">
+                    <i class="tim-icons icon-chart-pie-36"></i>
+                    <p>Hosting</p>
+                </a>
+            </li>
+
+            <li class="active ">
+                <a href="/dns">
+                    <i class="tim-icons icon-chart-pie-36"></i>
+                    <p>DNS-hosting</p>
+                </a>
+            </li>
+
+        </ul>
+    </div>
+</div>
