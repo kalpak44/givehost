@@ -19,6 +19,7 @@ public class VpsController {
     @GetMapping("/vps")
     public String showHomePage(Model model) {
         if (securityService.isAuthenticated()) {
+            model.addAttribute("isVpsPage", true);
             return "/pages/user-vps-page";
         } else {
             return "/pages/home";

@@ -16,6 +16,7 @@ public class HostingController {
     @GetMapping("/hosting")
     public String showHomePage(Model model) {
         if (securityService.isAuthenticated()) {
+            model.addAttribute("isHostingPage", true);
             return "/pages/user-hosting-page";
         } else {
             return "/pages/home";

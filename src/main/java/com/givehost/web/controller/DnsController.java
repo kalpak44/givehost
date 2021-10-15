@@ -16,6 +16,7 @@ public class DnsController {
     @GetMapping("/dns")
     public String showHomePage(Model model) {
         if (securityService.isAuthenticated()) {
+            model.addAttribute("isDnsPage", true);
             return "/pages/user-dns-page";
         } else {
             return "/pages/home";

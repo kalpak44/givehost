@@ -12,26 +12,26 @@
             </a>
         </div>
         <ul class="nav">
-            <li class="active ">
+            <li th:classappend="${isDashboardPage} ? active : ''">
                 <a href="/">
                     <i class="tim-icons icon-chart-pie-36"></i>
                     <p>Dashboard</p>
                 </a>
             </li>
-            <li class="active ">
+            <li th:classappend="${isVpsPage} ? active : ''">
                 <a href="/vps">
                     <i class="tim-icons icon-chart-pie-36"></i>
                     <p>VPS</p>
                 </a>
             </li>
-            <li class="active ">
+            <li th:classappend="${isHostingPage} ? active : ''">
                 <a href="/hosting">
                     <i class="tim-icons icon-chart-pie-36"></i>
                     <p>Hosting</p>
                 </a>
             </li>
 
-            <li class="active ">
+            <li th:classappend="${isDnsPage} ? active : ''">
                 <a href="/dns">
                     <i class="tim-icons icon-chart-pie-36"></i>
                     <p>DNS-hosting</p>

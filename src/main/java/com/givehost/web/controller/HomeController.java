@@ -24,6 +24,7 @@ public class HomeController {
             User principal = (User) authentication.getPrincipal();
             String email = principal.getUsername();
             model.addAttribute("names", email);
+            model.addAttribute("isDashboardPage", true);
             return "/pages/user-home-page";
         } else {
             return "/pages/home";
