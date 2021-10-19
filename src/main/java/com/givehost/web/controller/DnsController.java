@@ -14,10 +14,21 @@ public class DnsController {
     }
 
     @GetMapping("/dns")
-    public String showHomePage(Model model) {
+    public String showDnsHostingPage(Model model) {
         if (securityService.isAuthenticated()) {
             model.addAttribute("isDnsPage", true);
             return "/pages/user-dns-page";
+        } else {
+            return "/pages/home";
+        }
+    }
+
+
+    @GetMapping("/order-dns-hosting")
+    public String showOrderDnsPage(Model model) {
+        if (securityService.isAuthenticated()) {
+            model.addAttribute("isDnsPage", true);
+            return "/pages/user-order-dns-page";
         } else {
             return "/pages/home";
         }
