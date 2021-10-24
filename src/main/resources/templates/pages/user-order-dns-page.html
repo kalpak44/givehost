@@ -84,6 +84,7 @@
         </div>
         <!-- End Navbar -->
         <div class="content">
+            <form action="/order-dns-hosting" method="post">
             <div class="row">
                 <div class="col-lg-12 col-md-12">
                     <div class="card card-tasks">
@@ -96,18 +97,25 @@
                                     <p class="category">Domains limit: <span id="domain-limit-text">15</span></p>
                                     <div id="domains-limit" class="slider"></div>
                                 </div>
+                                <input type="text"  value="15" name="domainsCount" id="domains-count" style="display: none">
+
+                            </div>
+                            <div class="row" style="margin-top: 15px;">
+                                <div class="col-md-12 text-right">
+                                    <h4>Price: 0$</h4>
+                                </div>
                             </div>
                             <div class="row" style="margin-top: 15px;">
                                 <div class="col-md-12">
                                     <a class="btn" href="/dns">Chancel</a>
-                                    <button class="btn btn-primary">Order</button>
+                                    <button type="submit" class="btn btn-primary">Order</button>
                                 </div>
                             </div>
-
                         </div>
                     </div>
                 </div>
             </div>
+            </form>
         </div>
         <footer class="footer">
             <div class="container-fluid">
@@ -153,7 +161,9 @@
                 }
             });
             slider.on('change',function(v,handle){
-                $('#domain-limit-text').text(Math.floor(v));
+                let value = Math.floor(v);
+                $('#domain-limit-text').text(value);
+                $('#domains-count').val(value);
             });
         }
     });
